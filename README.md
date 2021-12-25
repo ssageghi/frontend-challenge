@@ -54,5 +54,9 @@ recommendations:
 - You can optionally host your project online. Check out the
   [ Vite documentation ](https://vitejs.dev/guide/static-deploy.html) to learn
   more.
+  
+## Instruction
 
+Create a public fork of this repository as the boilerplate for your project, then implement the required features. When you're finished, push your changes to your forked repository. Email us afterward so we can check your work.
+  
 Good luck.
