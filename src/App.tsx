@@ -1,22 +1,23 @@
-import { useState } from 'react'
-import logo from './logo.svg'
 import './App.scss'
 import TrendContainer from './components/TrendContainer'
+import { MainState } from './context/MainState'
 function App() {
 
   return (
-    <div className="App">
-      <header className='header'>
-        <h1>Trending</h1>
-        <h3>
-          See what the GitHub community is most excited about today.
+    <MainState>
+      <div className="App">
+        <header className='header'>
+          <h1>Trending</h1>
+          <h3>
+            See what the GitHub community is most excited about today.
 
-        </h3>
-      </header>
-      <main>
-        <TrendContainer />
-      </main>
-    </div>
+          </h3>
+        </header>
+        <main>
+          <TrendContainer />
+        </main>
+      </div>
+    </MainState>
   )
 }
 
