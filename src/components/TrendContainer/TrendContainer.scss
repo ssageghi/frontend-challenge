@@ -2,4 +2,10 @@
   max-width: 1012px;
   margin: auto;
   padding: 2rem;
+  &__content {
+    .row {
+      border: 1px solid #d0d7de;
+      padding: 16px;
+    }
+  }
 }

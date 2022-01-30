@@ -1,22 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import DevelopersContainer from '../DevelopersContainer';
 import RepositoriesContainer from '../RepositoriesContainer';
+import TrendActionButtons from '../TrendActionButtons';
 import './TrendContainer.scss'
-import { Radio } from 'antd';
+import mainContext from '../../context/mainContext';
 
 function TrendContainer() {
   //state to store that it's Developer trend or Repository Trend
-  const [state, setState] = useState("repositories")
+  const [requestPrams, setRequestParams] = useState<any>({
+    section: "repositories",
+    since: "",
+    spoken_language_code: "",
+    language: ""
+  })
+
   const [responseList, setResponseList] = useState([])
+  const { setOptions } = useContext(mainContext)
   useEffect(() => {
+    axios.get("http://localhost:3600")
+      .then((res) => {
+        if (setOptions) {
+          setOptions({ ...res.data })
+
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }, [])
+  useEffect(() => {
+    console.log(requestPrams);
     var config = {
       method: 'get',
-      url: `http://localhost:3600/${state}`,
+      url: `http://localhost:3600/${requestPrams.section}`,
       params: {
-        "spoken_language_code": "",
-        "since": "",
-        "language": ""
+        "spoken_language_code": requestPrams.spoken_language_code,
+        "since": requestPrams.since,
+        "language": requestPrams.language
       },
       headers: {
         'Accept': 'application/json',
@@ -34,20 +55,18 @@ function TrendContainer() {
       });
 
 
-  }, [state])
-  const options = [
-    { label: 'Repositories', value: 'repositories' },
-    { label: 'Developers', value: 'developers' },
-  ];
+  }, [requestPrams])
+
   return <div className='trends-container'>
     <div className='trends-container__header'>
-      <Radio.Group options={options} optionType="button" defaultValue={state}
-        buttonStyle="solid" onChange={(e) => setState(e.target.value)} />
+      <TrendActionButtons requestPrams={requestPrams}
+        setRequestParams={setRequestParams} />
+
 
     </div>
     <div className='trends-container__content'>
       {
-        state === "developers" ? <DevelopersContainer develoeprs={responseList} /> : <RepositoriesContainer repos={responseList} />
+        requestPrams.section === "developers" ? <DevelopersContainer developers={responseList} /> : <RepositoriesContainer repos={responseList} />
       }
     </div>
   </div>;

@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { RepositoryItem } from '../../interfaces/RepoInterfaces';
 const Repository: FunctionComponent<{ repository: RepositoryItem }> = (props) => {
   const repo = props;
-  return <div>{JSON.stringify(repo)}</div>;
+  return <div className='row'> {JSON.stringify(repo)}</div>;
 
 }
 

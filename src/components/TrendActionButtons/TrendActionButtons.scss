@@ -1,0 +1,23 @@
+.trend-action-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-top-right-radius: 6px;
+  border-top-right-radius: 6px;
+  .select-boxes {
+    display: flex;
+    align-items: center;
+    .select-box {
+      padding: 0 1rem;
+      display: flex;
+      align-items: center;
+      p {
+        margin-right: 0.5rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
