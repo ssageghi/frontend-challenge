@@ -10,5 +10,5 @@ export interface DeveloperItem {
 }
 
 export interface DevelopersProps {
-    repos: Array<DeveloperItem>
+    developers: Array<DeveloperItem>
 };
