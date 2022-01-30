@@ -1,2 +1,2 @@
-import RepositoriesContainer from RepositoriesContainer
+import RepositoriesContainer from "./RepositoriesContainer"
 export default RepositoriesContainer

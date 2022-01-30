@@ -3,16 +3,17 @@ import axios from 'axios';
 import DevelopersContainer from '../DevelopersContainer';
 import RepositoriesContainer from '../RepositoriesContainer';
 import './TrendContainer.scss'
+import { Radio } from 'antd';
 
 function TrendContainer() {
   //state to store that it's Developer trend or Repository Trend
-  const [state, setState] = useState("developers")
+  const [state, setState] = useState("repositories")
+  const [responseList, setResponseList] = useState([])
   useEffect(() => {
     var config = {
       method: 'get',
-      url: 'http://localhost:3600/developer',
+      url: `http://localhost:3600/${state}`,
       params: {
-        "section": "",
         "spoken_language_code": "",
         "since": "",
         "language": ""
@@ -26,7 +27,7 @@ function TrendContainer() {
 
     axios(config as Object)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        setResponseList(response.data)
       })
       .catch(function (error) {
         console.log(error);
@@ -34,9 +35,20 @@ function TrendContainer() {
 
 
   }, [state])
+  const options = [
+    { label: 'Repositories', value: 'repositories' },
+    { label: 'Developers', value: 'developers' },
+  ];
   return <div className='trends-container'>
     <div className='trends-container__header'>
+      <Radio.Group options={options} optionType="button" defaultValue={state}
+        buttonStyle="solid" onChange={(e) => setState(e.target.value)} />
 
+    </div>
+    <div className='trends-container__content'>
+      {
+        state === "developers" ? <DevelopersContainer develoeprs={responseList} /> : <RepositoriesContainer repos={responseList} />
+      }
     </div>
   </div>;
 

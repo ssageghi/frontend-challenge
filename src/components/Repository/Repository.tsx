@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { RepositoryItem } from '../../interfaces/RepoInterfaces';
+const Repository: FunctionComponent<{ repository: RepositoryItem }> = (props) => {
+  const repo = props;
+  return <div>{JSON.stringify(repo)}</div>;
 
-function Repository() {
-  return <div></div>;
 }
 
 export default Repository;

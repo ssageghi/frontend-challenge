@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import { DevelopersProps } from '../../interfaces/DeveloeprInterfaces'
 
-function DevelopersContainer() {
+interface DevelopersContainerPorps {
+  develoeprs: Array<Object>;
+}
+const DevelopersContainer: FunctionComponent<DevelopersProps> = (props) => {
   return <div></div>;
 }
 
