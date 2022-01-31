@@ -34,7 +34,7 @@ const Developer: FunctionComponent<{ developer: DeveloperItem, index: number }> 
     </div>
     <div className="dev-container__action-buttons">
       {developer.sponsorUrl ? <Button className='support-btn'>{heartIcon}Sponsor</Button> : ""}
-      <Buttondev-container__repo-information>Follow</Buttondev-container__repo-information>
+      <Button>Follow</Button>
     </div>
   </div>;
 }

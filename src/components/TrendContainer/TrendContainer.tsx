@@ -14,11 +14,11 @@ function TrendContainer() {
     language: ""
   })
   const [loading, setLoading] = useState<boolean>(false)
-  const [responseList, setResponseList] = useState([])
+  const [repositoryList, setRepositoryList] = useState([])
+  const [developerList, setDeveloperList] = useState([])
 
   useEffect(() => {
     setLoading(true)
-    setResponseList([])
     var config = {
       method: 'get',
       url: `http://localhost:3600/${requestPrams.section}`,
@@ -36,14 +36,19 @@ function TrendContainer() {
 
     axios(config as Object)
       .then(function (response) {
-        setResponseList(response.data)
+        if (requestPrams.section === "developers") {
+          setDeveloperList(response.data)
+        }
+        else {
+          setRepositoryList(response.data)
+
+        }
         setLoading(false)
       })
       .catch(function (error) {
         console.log(error);
         setLoading(false)
       });
-
 
   }, [requestPrams])
 
@@ -56,14 +61,12 @@ function TrendContainer() {
     </div>
 
     <Spin spinning={loading} size={"large"}>
-      {responseList.length > 0 ?
-        <div className='trends-container__content'>
-          {
-            requestPrams.section === "developers" ? <DevelopersContainer developers={responseList} /> : <RepositoriesContainer repos={responseList} />
-          }
-        </div>
-        :
-        <Empty className='no_data' />}
+      {/* {responseList.length > 0 ? */}
+      <div className='trends-container__content'>
+        {
+          requestPrams.section === "developers" ? <DevelopersContainer developers={developerList} /> : <RepositoriesContainer repos={repositoryList} />
+        }
+      </div>
 
     </Spin>
   </div>;

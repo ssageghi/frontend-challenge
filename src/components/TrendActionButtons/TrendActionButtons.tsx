@@ -29,22 +29,25 @@ const TrendActionButtons: FunctionComponent<Props> = ({
     </div>
 
     <div className='select-boxes'>
-      <div className='select-box'>
-        <p>Spoken Languages:</p>
-        <Select
-          showSearch
-          placeholder="Any"
-          optionFilterProp="children"
-          dropdownMatchSelectWidth={false}
-          defaultValue="Any"
-          onChange={(e) => setRequestParams({ ...requestPrams, spoken_language_code: e })}
-        >
-          {spoken_languages?.map((option: { code?: string, name?: string, native?: string }) => (
-            <Select.Option value={option.code} key={option.code}>{option.name}</Select.Option>
+      {
+        requestPrams.section === "repositories" ?
+          <div className='select-box'>
+            <p>Spoken Languages:</p>
+            <Select
+              showSearch
+              placeholder="Any"
+              optionFilterProp="children"
+              dropdownMatchSelectWidth={false}
+              defaultValue="Any"
+              onChange={(e) => setRequestParams({ ...requestPrams, spoken_language_code: e })}
+            >
+              {spoken_languages?.map((option: { code?: string, name?: string, native?: string }) => (
+                <Select.Option value={option.code} key={option.code}>{option.name}</Select.Option>
 
-          ))}
-        </Select>
-      </div>
+              ))}
+            </Select>
+          </div> : ""
+      }
       <div className='select-box'>
         <p>Languages: </p>
         <Select
