@@ -4,8 +4,7 @@ import DevelopersContainer from '../DevelopersContainer';
 import RepositoriesContainer from '../RepositoriesContainer';
 import TrendActionButtons from '../TrendActionButtons';
 import './TrendContainer.scss'
-import mainContext from '../../context/mainContext';
-
+import { Spin, Empty } from 'antd';
 function TrendContainer() {
   //state to store that it's Developer trend or Repository Trend
   const [requestPrams, setRequestParams] = useState<any>({
@@ -14,23 +13,12 @@ function TrendContainer() {
     spoken_language_code: "",
     language: ""
   })
-
+  const [loading, setLoading] = useState<boolean>(false)
   const [responseList, setResponseList] = useState([])
-  const { setOptions } = useContext(mainContext)
-  useEffect(() => {
-    axios.get("http://localhost:3600")
-      .then((res) => {
-        if (setOptions) {
-          setOptions({ ...res.data })
 
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }, [])
   useEffect(() => {
-    console.log(requestPrams);
+    setLoading(true)
+    setResponseList([])
     var config = {
       method: 'get',
       url: `http://localhost:3600/${requestPrams.section}`,
@@ -49,9 +37,11 @@ function TrendContainer() {
     axios(config as Object)
       .then(function (response) {
         setResponseList(response.data)
+        setLoading(false)
       })
       .catch(function (error) {
         console.log(error);
+        setLoading(false)
       });
 
 
@@ -64,11 +54,18 @@ function TrendContainer() {
 
 
     </div>
-    <div className='trends-container__content'>
-      {
-        requestPrams.section === "developers" ? <DevelopersContainer developers={responseList} /> : <RepositoriesContainer repos={responseList} />
-      }
-    </div>
+
+    <Spin spinning={loading} size={"large"}>
+      {responseList.length > 0 ?
+        <div className='trends-container__content'>
+          {
+            requestPrams.section === "developers" ? <DevelopersContainer developers={responseList} /> : <RepositoriesContainer repos={responseList} />
+          }
+        </div>
+        :
+        <Empty className='no_data' />}
+
+    </Spin>
   </div>;
 
 }

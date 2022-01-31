@@ -2,10 +2,15 @@ import { FunctionComponent, useContext } from 'react';
 import { Radio } from 'antd';
 import { Select } from 'antd'
 import './TrendActionButtons.scss';
-import mainContext from '../../context/mainContext';
-
+import languages from '../../staticData/languages.json'
+import spoken_languages from '../../staticData/spoken_languages.json'
 interface Props {
-  requestPrams: Object;
+  requestPrams: {
+    section: string,
+    since: string,
+    spoken_language_code: string,
+    language: string
+  };
   setRequestParams: (val: Object) => void;
 };
 const TrendActionButtons: FunctionComponent<Props> = ({
@@ -16,13 +21,10 @@ const TrendActionButtons: FunctionComponent<Props> = ({
     { label: 'Repositories', value: 'repositories' },
     { label: 'Developers', value: 'developers' },
   ];
-  const { options } = useContext(mainContext)
-  const selectChange = (e: string) => {
-    console.log(e);
-  }
+
   return <div className='trend-action-buttons-container'>
     <div className='toggle-buttons'>
-      <Radio.Group options={ButtonOptions} optionType="button" defaultValue={requestPrams}
+      <Radio.Group options={ButtonOptions} optionType="button" defaultValue={requestPrams.section}
         buttonStyle="solid" onChange={(e) => setRequestParams({ ...requestPrams, section: e.target.value })} />
     </div>
 
@@ -33,11 +35,12 @@ const TrendActionButtons: FunctionComponent<Props> = ({
           showSearch
           placeholder="Any"
           optionFilterProp="children"
+          dropdownMatchSelectWidth={false}
           defaultValue="Any"
           onChange={(e) => setRequestParams({ ...requestPrams, spoken_language_code: e })}
         >
-          {options.languages?.map((option: string) => (
-            <Select.Option value={option} key={option}>{option}</Select.Option>
+          {spoken_languages?.map((option: { code?: string, name?: string, native?: string }) => (
+            <Select.Option value={option.code} key={option.code}>{option.name}</Select.Option>
 
           ))}
         </Select>
@@ -48,10 +51,11 @@ const TrendActionButtons: FunctionComponent<Props> = ({
           showSearch
           defaultValue="Any"
           placeholder="Any"
+          dropdownMatchSelectWidth={false}
           onChange={(e) => setRequestParams({ ...requestPrams, language: e })}
           optionFilterProp="children"
         >
-          {options.spoken_languages?.map((option: string) => (
+          {languages?.map((option: string) => (
             <Select.Option value={option} key={option}>{option}</Select.Option>
 
           ))}
@@ -64,13 +68,14 @@ const TrendActionButtons: FunctionComponent<Props> = ({
         <Select
           onChange={(e) => setRequestParams({ ...requestPrams, since: e })}
           showSearch
+          dropdownMatchSelectWidth={false}
           placeholder="Any"
           defaultValue="Any"
           optionFilterProp="children"
         >
-          <Select.Option value={"today"} key={"Today"} >today</Select.Option>
-          <Select.Option value={"this-week"} key={"this-week"} >This Week</Select.Option>
-          <Select.Option value={"this-month"} key={"this-month"} >This Month</Select.Option>
+          <Select.Option value={"daily"} key={"Today"} >today</Select.Option>
+          <Select.Option value={"weekly"} key={"this-week"} >This Week</Select.Option>
+          <Select.Option value={"monthly"} key={"this-month"} >This Month</Select.Option>
 
         </Select>
       </div>
