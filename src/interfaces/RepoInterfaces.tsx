@@ -1,3 +1,8 @@
+export interface RepositoryBuilder {
+    "avatar": string,
+    "url": string,
+    "username": string,
+}
 export interface RepositoryItem {
     "author": string,
     "reponame": string,
@@ -8,7 +13,7 @@ export interface RepositoryItem {
     "stars": number,
     "forks": number,
     "laststars": number,
-    "builtby": Array<Object>
+    "builtby": Array<RepositoryBuilder>
 }
 
 export interface RepositoriesProps {
