@@ -14,54 +14,52 @@ const Repository: FunctionComponent<{ repository: RepositoryItem }> = (props) =>
   );
 
   return (
-    <div className='row'>
-      <div className='repo-container'>
-        <div className='repo-container__header'>
-          <a href={repository.repourl}>
-            {repoIcon}
-            <h1><span>{repository.author} / </span>  {repository.reponame} </h1>
-          </a>
-          <Dropdown.Button overlay={menu} icon={trianAngle}>
-            {starIcon}
-            Star
-          </Dropdown.Button>
+    <div className='row repo-container'>
+      <div className='repo-container__header'>
+        <a href={repository.repourl}>
+          {repoIcon}
+          <h1><span>{repository.author} / </span>  {repository.reponame} </h1>
+        </a>
+        <Dropdown.Button overlay={menu} icon={trianAngle}>
+          {starIcon}
+          Star
+        </Dropdown.Button>
 
-        </div>
-        <div className='repo-container__content'>
-          {repository.repodesc}
-        </div>
-        <div className='repo-container__footer'>
-          <div className='repo-container__details'>
-            <div className="repo-container__language">
-              {repository.language}
-            </div>
-            <div className='repo-container__total-star'>
-              {starIcon}
-              {repository.stars}
-            </div>
-            <div className='repo-container__total-fork'>
-              {forkIcon}
-              {repository.forks}
-            </div>
-            <div className='repo-container__built-by'>
-              <p>Built by</p>
-              <div>
-                {
-                  repository.builtby?.map(person => (
-                    <a href={person.url} key={person.username}>
-                      <img src={person.avatar} alt={person.username} />
-                    </a>))
-                }
-              </div>
+      </div>
+      <div className='repo-container__content'>
+        {repository.repodesc}
+      </div>
+      <div className='repo-container__footer'>
+        <div className='repo-container__details'>
+          <div className="repo-container__language">
+            {repository.language}
+          </div>
+          <div className='repo-container__total-star'>
+            {starIcon}
+            {repository.stars}
+          </div>
+          <div className='repo-container__total-fork'>
+            {forkIcon}
+            {repository.forks}
+          </div>
+          <div className='repo-container__built-by'>
+            <p>Built by</p>
+            <div>
+              {
+                repository.builtby?.map(person => (
+                  <a href={person.url} key={person.username}>
+                    <img src={person.avatar} alt={person.username} />
+                  </a>))
+              }
             </div>
           </div>
-          <div className='repo-container__today-star'>
-            {starIcon}
-            {repository.laststars}
+        </div>
+        <div className='repo-container__today-star'>
+          {starIcon}
+          {repository.laststars}
 
-            <p>starts today</p>
+          <p>starts today</p>
 
-          </div>
         </div>
       </div>
     </div >);
