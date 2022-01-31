@@ -3,7 +3,6 @@ import Repository from '../Repository';
 import { RepositoriesProps } from '../../interfaces/RepoInterfaces'
 const RepositoriesContainer: FunctionComponent<RepositoriesProps> = (props) => {
   const { repos } = props;
-  console.log(props, repos);
   return <>
     {
       repos?.map(repo => (

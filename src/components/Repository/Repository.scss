@@ -1,0 +1,94 @@
+.repo-container {
+  .ant-dropdown-button {
+    button {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      span {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+  &__header,
+  &__content {
+    margin-bottom: 1.5rem;
+  }
+  &__content {
+    max-width: 76%;
+    text-align: justify;
+    color: #666;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    a {
+      display: flex;
+      align-items: center;
+      color: #0969da;
+      &:hover {
+        text-decoration: underline;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.4rem;
+        color: inherit;
+        margin: 0 0.5rem;
+        font-weight: bold;
+        span {
+          font-weight: normal;
+        }
+      }
+    }
+  }
+  &__footer {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    > div {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__total-star,
+  &__built-by,
+  &__total-fork,
+  &__language,
+  &__today-star {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    svg {
+      margin-right: 0.25rem;
+    }
+  }
+  &__built-by,
+  &__today-star {
+    margin: 0;
+    p {
+      margin: 0;
+    }
+  }
+  &__built-by {
+    p {
+      margin-right: 0.25rem;
+    }
+    a {
+      margin-right: 0.25rem;
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0;
+      }
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+  &__today-star {
+    p {
+      margin-left: 0.25rem;
+    }
+  }
+}
