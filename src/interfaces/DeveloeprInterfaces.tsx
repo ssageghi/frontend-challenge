@@ -7,6 +7,7 @@ export interface DeveloperItem {
     "reponame": string,
     "repourl": string,
     "description": number,
+    "sponsorUrl": string
 }
 
 export interface DevelopersProps {
