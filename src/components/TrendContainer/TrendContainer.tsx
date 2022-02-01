@@ -21,7 +21,7 @@ function TrendContainer() {
     setLoading(true)
     var config = {
       method: 'get',
-      url: `http://localhost:3600/${requestPrams.section}`,
+      url: `https://afternoon-escarpment-37303.herokuapp.com/${requestPrams.section}`,
       params: {
         "spoken_language_code": requestPrams.spoken_language_code,
         "since": requestPrams.since,
