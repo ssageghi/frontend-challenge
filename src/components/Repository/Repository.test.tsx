@@ -4,7 +4,7 @@ import { RepositoryItem } from '../../interfaces/RepoInterfaces';
 const repository = {
     "author": "psf",
     "reponame": "black",
-    "repourl": "https://github.com//psf/black",
+    "repourl": "https://github.com/psf/black",
     "repodesc": "The uncompromising Python code formatter",
     "language": "Python",
     "langcolor": "#3572A5",
@@ -40,9 +40,42 @@ const repository = {
     ]
 }
 
-it("Navigate to user git hub url", () => {
-    const { container } = render(<Repository repository={repository} />)
-    console.log(container.getElementsByTagName("h1"))
+it("showing author name and repo name", () => {
+    // expect(screen.getByText(repository.author)).toBe(repository.author)
+    const { container } = render(<Repository repository={repository} />);
+
+    expect(container.querySelector(".repo-container__header h1")).toHaveTextContent(`${repository.author} / ${repository.reponame}`)
+
+
+})
+it("it redirect to correct github url", () => {
+    // expect(screen.getByText(repository.author)).toBe(repository.author)
+    const { container } = render(<Repository repository={repository} />);
+    const link = container.querySelector(".repo-container__header a")?.getAttribute("href")
+    expect(link).toBe(repository.repourl)
+
+
+})
+it("showing repo description", () => {
+    // expect(screen.getByText(repository.author)).toBe(repository.author)
+    const { container } = render(<Repository repository={repository} />);
+
+    expect(container.querySelector(".repo-container__content")).toHaveTextContent(repository.repodesc)
+})
+it("it show starts and forks", () => {
+    // expect(screen.getByText(repository.author)).toBe(repository.author)
+    const { container } = render(<Repository repository={repository} />);
+
+    expect(container).toHaveTextContent(`${repository.stars}`)
+    expect(container).toHaveTextContent(`${repository.forks}`)
+})
+it("it show the repo contributer ", () => {
+    // expect(screen.getByText(repository.author)).toBe(repository.author)
+    const { container } = render(<Repository repository={repository} />);
+
+    
+    expect(container.querySelector(".repo-container__built-by")).toHaveTextContent("Built by")
+    expect(container.querySelectorAll(".repo-container__built-by > div a")?.length).toBe(repository.builtby.length)
 
 
 })
