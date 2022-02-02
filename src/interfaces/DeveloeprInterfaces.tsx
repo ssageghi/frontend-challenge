@@ -6,7 +6,7 @@ export interface DeveloperItem {
     "url": string,
     "reponame": string,
     "repourl": string,
-    "description": number,
+    "description": string,
     "sponsorUrl": string
 }
 
